@@ -215,6 +215,51 @@ section.sand{background:var(--sand)}
 .btn[disabled]{opacity:.6;pointer-events:none}
 button.btn{width:100%;font-family:var(--f-label)}
 
+/* wish carousel: fixed height, one wish at a time */
+.wcar{max-width:560px;margin:34px auto 0;display:grid;gap:14px;justify-items:center;width:100%}
+.wc-stage{position:relative;width:100%;height:clamp(230px,58vw,250px);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+.wc-stage:active{cursor:grabbing}
+.wslide{position:absolute;inset:0;background:#FFFDF9;border:1px solid rgba(58,42,30,.08);border-radius:16px;box-shadow:0 22px 44px -30px rgba(58,42,30,.5);padding:26px 26px 22px;display:grid;grid-template-rows:auto 1fr auto;gap:10px;text-align:center;opacity:0;transform:translateX(40px) scale(.98);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.wslide.on{opacity:1;transform:none}
+.wslide.from-left{transform:translateX(-40px) scale(.98)}
+.wslide.to-left{opacity:0;transform:translateX(-40px) scale(.98)}
+.wslide.to-right{opacity:0;transform:translateX(40px) scale(.98)}
+.wslide .q{font-family:var(--f-display);font-size:3rem;line-height:.6;height:22px;color:var(--gold-soft,#D8B86E);color:var(--gold)}
+.wslide .m{font-style:italic;color:var(--ink);font-size:1.12rem;line-height:1.55;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;align-self:center;overflow-wrap:anywhere;white-space:pre-line}
+.wslide .who{display:grid;gap:2px}
+.wslide .n{font-family:var(--f-display);font-style:italic;font-weight:700;font-size:1.15rem;color:var(--ink);overflow-wrap:anywhere}
+.wslide .d{font-family:var(--f-label);font-size:.5rem;letter-spacing:.24em;text-transform:uppercase;color:#B3A595}
+.wslide.new{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,145,47,.25),0 22px 44px -30px rgba(58,42,30,.5)}
+.wslide .more-link{background:none;border:0;padding:0;font-family:var(--f-label);font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-lo);text-decoration:underline;text-underline-offset:3px;cursor:pointer;justify-self:center}
+.wc-empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-style:italic;color:var(--ink-soft);border:1px dashed rgba(184,145,47,.35);border-radius:16px;padding:20px}
+.wc-nav{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:12px;width:100%;max-width:360px}
+.wc-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#FFFDF9;color:var(--gold-lo);display:grid;place-items:center;cursor:pointer;transition:background .2s}
+.wc-btn:hover{background:var(--sand)}
+.wc-btn svg{width:18px;height:18px}
+.wc-mid{display:grid;gap:6px;justify-items:center}
+.wc-count{font-family:var(--f-label);font-size:.6rem;letter-spacing:.24em;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.wc-track{width:100%;height:2px;background:rgba(184,145,47,.18);border-radius:2px;overflow:hidden}
+.wc-bar{display:block;height:100%;width:0;background:var(--gold-grad)}
+@keyframes wbar{from{width:0}to{width:100%}}
+.wc-all{background:none;border:0;font-family:var(--f-label);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-lo);text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px}
+
+/* all-wishes sheet */
+.wsheet{position:fixed;inset:0;z-index:70;display:grid;align-items:end;justify-items:center;background:rgba(28,23,20,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:0 max(0px,env(safe-area-inset-right,0px)) 0 max(0px,env(safe-area-inset-left,0px))}
+@media (min-width:700px){.wsheet{align-items:center;padding:24px}}
+.wsheet-in{width:100%;max-width:620px;max-height:82svh;background:var(--ivory);border-radius:20px 20px 0 0;display:grid;grid-template-rows:auto 1fr;overflow:hidden;box-shadow:0 -20px 50px -20px rgba(0,0,0,.5);animation:sheetUp .35s cubic-bezier(.2,.7,.2,1)}
+@media (min-width:700px){.wsheet-in{border-radius:20px}}
+@keyframes sheetUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.wsheet-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.wsheet-h b{font-family:var(--f-display);font-style:italic;font-size:1.35rem;color:var(--ink)}
+.wsheet-h small{display:block;font-family:var(--f-label);font-size:.55rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.wsheet-x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#FFFDF9;font-size:1.3rem;line-height:1;color:var(--ink);cursor:pointer;flex:none}
+.wsheet-list{overflow-y:auto;padding:16px 18px calc(22px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;align-content:start;overscroll-behavior:contain}
+.wsheet-list .wcard{background:#FFFDF9;border:1px solid rgba(58,42,30,.08);border-radius:12px;padding:16px 18px;display:grid;gap:6px;min-width:0}
+.wsheet-list .wcard .n{font-family:var(--f-display);font-style:italic;font-weight:700;font-size:1.1rem;color:var(--ink);overflow-wrap:anywhere}
+.wsheet-list .wcard .m{font-style:italic;color:var(--ink-soft);font-size:1.02rem;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere}
+.wsheet-list .wcard .d{font-family:var(--f-label);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:#B3A595}
+body.sheet-open{overflow:hidden}
+
 /* wish wall */
 .wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:34px auto 0;max-width:880px}
 @media (max-width:640px){.wall{grid-template-columns:1fr}}
@@ -261,6 +306,14 @@ footer .credit{margin:40px auto 0;padding-top:22px;border-top:1px solid rgba(226
 footer .credit a{color:var(--gold-hi);text-decoration:none;border-bottom:1px solid rgba(226,196,110,.4);padding-bottom:2px;margin-left:4px}
 footer .credit a:hover{color:#FFF1C8;border-bottom-color:var(--gold-hi)}
 footer .credit .heart{display:inline-block;letter-spacing:0;margin:0 4px}
+footer .cta{max-width:440px;margin:14px auto 0;font-style:italic;font-size:1rem;line-height:1.6;color:#A99A86;text-wrap:balance}
+footer .cta a{font-style:normal;font-weight:600;color:var(--gold-hi);text-decoration:none;border-bottom:1px solid rgba(226,196,110,.45);padding-bottom:1px}
+footer .cta a:hover{color:#FFF1C8}
+.share-btn{margin-top:22px;display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:999px;border:0;background:#FFF8EA;color:var(--ink);font-family:var(--f-label);font-size:.66rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 26px -14px rgba(0,0,0,.7);transition:transform .2s,box-shadow .2s}
+.share-btn:hover{transform:translateY(-1px);box-shadow:0 14px 30px -14px rgba(226,196,110,.6)}
+.share-btn svg{width:16px;height:16px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);z-index:80;max-width:calc(100% - 32px);background:var(--espresso-2);color:#F3E7CC;border:1px solid rgba(226,196,110,.4);border-radius:12px;padding:12px 18px;font-size:.98rem;box-shadow:0 14px 30px -12px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;text-align:center;overflow-wrap:anywhere}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 
 /* our song */
 .song{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;background:var(--espresso);color:#E9DCC4;border-radius:16px;padding:clamp(22px,5vw,34px);box-shadow:0 30px 60px -36px rgba(28,23,20,.8);position:relative;overflow:hidden}
@@ -508,8 +561,21 @@ footer .credit .heart{display:inline-block;letter-spacing:0;margin:0 4px}
         <p class="fine" id="wishStatus" role="status">Your wishes will appear below for everyone to see.</p>
       </form>
     </div>
-    <div class="wall" id="wall" aria-live="polite"><div class="wall-empty" id="wallEmpty">Loading wishes…</div></div>
-    <div class="more"><button class="btn" id="moreBtn" type="button" hidden>Load more</button></div>
+    <div class="wcar" id="wcar" aria-roledescription="carousel" aria-label="Wishes from family and friends">
+      <div class="wc-stage" id="wStage" aria-live="polite"><div class="wc-empty" id="wallEmpty">Loading wishes…</div></div>
+      <div class="wc-nav" id="wNav" hidden>
+        <button class="wc-btn" id="wPrev" type="button" aria-label="Previous wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="wc-mid"><span class="wc-count" id="wCount">1 / 1</span><span class="wc-track"><i class="wc-bar" id="wBar"></i></span></div>
+        <button class="wc-btn" id="wNext" type="button" aria-label="Next wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <button class="wc-all" id="wAll" type="button" hidden>View all wishes</button>
+    </div>
+    <div class="wsheet" id="wSheet" role="dialog" aria-modal="true" aria-labelledby="wSheetTitle" hidden>
+      <div class="wsheet-in">
+        <div class="wsheet-h"><div><small>Your blessings</small><b id="wSheetTitle">All wishes</b></div><button class="wsheet-x" id="wSheetX" type="button" aria-label="Close">×</button></div>
+        <div class="wsheet-list" id="wSheetList"></div>
+      </div>
+    </div>
     <div class="narrow">
       <div class="contact">
         <span class="lbl">Family contact</span>
@@ -529,6 +595,9 @@ footer .credit .heart{display:inline-block;letter-spacing:0;margin:0 4px}
   <div class="share"><small>Sharing happiness</small><b>Archana &amp; Raneesh</b></div>
   <div class="hosts">Smt. P. Ajitha &amp; family · Pulukool House, Kottichal</div>
   <div class="credit">Crafted with <span class="heart" aria-label="love">💖</span> by <a href="https://occazora.in/" target="_blank" rel="noopener">Occazora</a></div>
+  <p class="cta">Want to create your own custom wedding invitation? <a href="https://occazora.in/" target="_blank" rel="noopener">Check out OCCAZORA</a> for your personalised invitation.</p>
+  <button class="share-btn" id="shareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15V3m0 0-4 4m4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" stroke-linecap="round" stroke-linejoin="round"/></svg>Share this invitation</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </footer>
 
 <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
@@ -624,27 +693,74 @@ footer .credit .heart{display:inline-block;letter-spacing:0;margin:0 4px}
       .then(function(){rBtn.disabled=false;});
   });
 
-  /* Wishes */
+  /* Wishes: one at a time in a fixed-height carousel that advances by itself */
   var wf=document.getElementById('wishForm'), wSt=document.getElementById('wishStatus'), wBtn=document.getElementById('wishBtn');
-  var wall=document.getElementById('wall'), wEmpty=document.getElementById('wallEmpty'), more=document.getElementById('moreBtn');
-  var all=[], shown=0, PAGE=6;
+  var stage=document.getElementById('wStage'), wEmpty=document.getElementById('wallEmpty'), wNav=document.getElementById('wNav'),
+      wCount=document.getElementById('wCount'), wBar=document.getElementById('wBar'), wAll=document.getElementById('wAll'),
+      sheet=document.getElementById('wSheet'), sheetList=document.getElementById('wSheetList');
+  var all=[], idx=0, timer=null, hold=false, offscreen=false, DUR=5000;
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function fmt(t){var d=new Date(t);if(isNaN(d))return '';return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});}
-  function card(w,isNew){
-    var c=document.createElement('article');c.className='wcard'+(isNew?' new':'');
-    var n=document.createElement('div');n.className='n';n.textContent=w.name;
-    var m=document.createElement('div');m.className='m';m.textContent='“'+w.message+'”';
-    var d=document.createElement('div');d.className='d';d.textContent=fmt(w.time);
-    c.appendChild(n);c.appendChild(m);c.appendChild(d);return c;
+  function el(tag,cls,txt){var e=document.createElement(tag);e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+  function slide(w,isNew){
+    var c=el('article','wslide'+(isNew?' new':''));
+    c.appendChild(el('div','q','“'));
+    var m=el('div','m',w.message);c.appendChild(m);
+    var who=el('div','who');who.appendChild(el('div','n',w.name));who.appendChild(el('div','d',fmt(w.time)));
+    if(w.message.length>150){var r=el('button','more-link','Read full wish');r.type='button';r.addEventListener('click',function(e){e.stopPropagation();openSheet();});who.appendChild(r);}
+    c.appendChild(who);return c;
   }
-  function render(){
-    while(shown<Math.min(all.length,shownTarget)){wall.appendChild(card(all[shown]));shown++;}
-    wEmpty.hidden=all.length>0; more.hidden=shown>=all.length;
+  function playing(){return all.length>1&&!hold&&!offscreen&&!still&&!document.hidden&&sheet.hidden;}
+  function wTick(){
+    clearTimeout(timer); wBar.style.animation='none'; void wBar.offsetWidth;
+    if(playing()){wBar.style.animation='wbar '+DUR+'ms linear forwards'; timer=setTimeout(function(){wShow(idx+1,1);},DUR);}
+    else wBar.style.width=all.length>1?'0':'100%';
   }
-  var shownTarget=PAGE;
-  more.addEventListener('click',function(){shownTarget+=PAGE;render();});
+  function wShow(i,dir,isNew){
+    if(!all.length)return;
+    idx=(i+all.length)%all.length;
+    var old=stage.querySelector('.wslide.on'), c=slide(all[idx],isNew);
+    if(dir<0)c.classList.add('from-left');
+    stage.appendChild(c); void c.offsetWidth;
+    c.classList.remove('from-left'); c.classList.add('on');
+    if(old){old.classList.remove('on');old.classList.add(dir<0?'to-right':'to-left');setTimeout(function(){old.remove();},600);}
+    wCount.textContent=(idx+1)+' / '+all.length;
+    wTick();
+  }
+  function refresh(){
+    wEmpty.hidden=all.length>0; wNav.hidden=all.length<2; wAll.hidden=all.length<2;
+    wAll.textContent='View all '+all.length+' wishes';
+  }
+  document.getElementById('wPrev').addEventListener('click',function(){wShow(idx-1,-1);});
+  document.getElementById('wNext').addEventListener('click',function(){wShow(idx+1,1);});
+  /* pause while a guest is reading (finger or mouse on the card), swipe to change */
+  var sx=null, sy=null;
+  stage.addEventListener('pointerdown',function(e){sx=e.clientX;sy=e.clientY;hold=true;wTick();});
+  stage.addEventListener('pointerup',function(e){
+    if(sx!=null){var dx=e.clientX-sx, dy=e.clientY-sy; if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)) wShow(idx+(dx<0?1:-1),dx<0?1:-1);}
+    sx=null; hold=false; wTick();
+  });
+  stage.addEventListener('pointercancel',function(){sx=null;hold=false;wTick();});
+  stage.addEventListener('mouseenter',function(){hold=true;wTick();});
+  stage.addEventListener('mouseleave',function(){hold=false;wTick();});
+  document.addEventListener('visibilitychange',wTick);
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){offscreen=!es[0].isIntersecting;wTick();},{threshold:.4}).observe(stage);}
+  /* everyone's wishes in a scrollable sheet */
+  function openSheet(){
+    sheetList.textContent='';
+    all.forEach(function(w){var c=el('article','wcard');c.appendChild(el('div','n',w.name));c.appendChild(el('div','m','“'+w.message+'”'));c.appendChild(el('div','d',fmt(w.time)));sheetList.appendChild(c);});
+    sheet.hidden=false; document.body.classList.add('sheet-open'); wTick(); document.getElementById('wSheetX').focus();
+  }
+  function closeSheet(){sheet.hidden=true;document.body.classList.remove('sheet-open');wTick();wAll.focus();}
+  wAll.addEventListener('click',openSheet);
+  document.getElementById('wSheetX').addEventListener('click',closeSheet);
+  sheet.addEventListener('click',function(e){if(e.target===sheet)closeSheet();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!sheet.hidden)closeSheet();});
+
   if(online){
     fetch(API+(API.indexOf('?')>-1?'&':'?')+'action=wishes').then(function(r){return r.json();}).then(function(j){
-      all=(j&&j.wishes)||[]; if(!all.length) wEmpty.textContent='Be the first to send your wishes ✦'; render();
+      all=(j&&j.wishes)||[]; if(!all.length) wEmpty.textContent='Be the first to send your wishes ✦';
+      refresh(); wShow(0,1);
     }).catch(function(){wEmpty.textContent='Wishes will appear here.';});
   } else {
     wEmpty.textContent='Wishes from family and friends will appear here.';
@@ -656,12 +772,28 @@ footer .credit .heart{display:inline-block;letter-spacing:0;margin:0 4px}
     if(!online){wSt.className='fine err';wSt.textContent=OFFLINE_MSG;return;}
     wBtn.disabled=true; wSt.className='fine'; wSt.textContent='Sending…';
     post({type:'wish',name:name,message:msg,website:document.getElementById('wHp').value}).then(function(){
-      var w={name:name,message:msg,time:new Date().toISOString()};
-      all.unshift(w); wall.insertBefore(card(w,true),wall.querySelector('.wcard')); shown++; shownTarget++; wEmpty.hidden=true;
-      document.getElementById('wMsg').value=''; wSt.textContent='Thank you! Your wishes are on the wall below.';
+      all.unshift({name:name,message:msg,time:new Date().toISOString()});
+      refresh(); wShow(0,-1,true);
+      document.getElementById('wMsg').value=''; wSt.textContent='Thank you! Your wishes are now in the carousel below.';
     }).catch(function(){wSt.className='fine err';wSt.textContent='Couldn’t send right now. Please try again.';})
       .then(function(){wBtn.disabled=false;});
   });
+
+  /* share the invitation: phone share sheet, else copy the link */
+  (function(){
+    var btn=document.getElementById('shareBtn'), t=document.getElementById('toast'), tt;
+    function toast(msg){t.textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show');},3200);}
+    var url=/^https?:/.test(location.href)&&!/claude|usercontent/.test(location.hostname)?location.origin+location.pathname:'https://anjana-weds-swaraj.occazora.in/';
+    btn.addEventListener('click',function(){
+      var data={title:'Anjana & Swaraj \u2014 Wedding Invitation',text:'You are warmly invited to the wedding of Anjana & Swaraj on Sunday, 6 December 2026 at Neelambari Auditorium, Chirakkal.',url:url};
+      function copy(){
+        try{navigator.clipboard.writeText(url).then(function(){toast('Invitation link copied!');},function(){toast('Share this link: '+url);});}
+        catch(e){toast('Share this link: '+url);}
+      }
+      if(navigator.share){navigator.share(data).catch(function(e){if(e&&e.name!=='AbortError')copy();});}
+      else copy();
+    });
+  })();
 
   /* Apple Calendar needs the .ics hosted beside the page; hide the button where it is not */
   (function(){var a=document.getElementById('appleCal');
